@@ -9,16 +9,25 @@ import { storageLocal } from "@pureadmin/utils";
 import { ref, computed, watch, onBeforeMount } from "vue";
 import { findRouteByPath, getParentPaths } from "@/router/utils";
 import { usePermissionStoreHook } from "@/store/modules/permission";
-
+import LogoutCircleRLine from "@iconify-icons/ri/logout-circle-r-line";
+import { useTranslationLang } from "@/layout/hooks/useTranslationLang";
 const route = useRoute();
 const showLogo = ref(
   storageLocal().getItem<StorageConfigs>("responsive-configure")?.showLogo ??
     true
 );
 
-const { routers, device, pureApp, isCollapse, menuSelect, toggleSideBar } =
-  useNav();
-
+const {
+  routers,
+  device,
+  pureApp,
+  isCollapse,
+  menuSelect,
+  toggleSideBar,
+  username,
+  logout
+} = useNav();
+const { t, locale, translationCh, translationEn } = useTranslationLang();
 const subMenuData = ref([]);
 
 const menuData = computed(() => {
@@ -73,7 +82,7 @@ watch(
         router
         unique-opened
         mode="vertical"
-        class="outer-most select-none"
+        class="select-none outer-most"
         :collapse="isCollapse"
         :default-active="route.path"
         :collapse-transition="false"
@@ -84,15 +93,29 @@ watch(
           :key="routes.path"
           :item="routes"
           :base-path="routes.path"
-          class="outer-most select-none"
+          class="select-none outer-most"
         />
       </el-menu>
     </el-scrollbar>
-    <leftCollapse
+    <!-- <leftCollapse
       v-if="device !== 'mobile'"
       :is-active="pureApp.sidebar.opened"
       @toggleClick="toggleSideBar"
-    />
+    /> -->
+    <!-- 退出登录 -->
+    <el-dropdown trigger="click">
+      <span class="select-none el-dropdown-link navbar-bg-hover">
+        <p v-if="username" class="dark:text-white">{{ username }}</p>
+      </span>
+      <template #dropdown>
+        <el-dropdown-menu class="logout">
+          <el-dropdown-item @click="logout">
+            <IconifyIconOffline :icon="LogoutCircleRLine" style="margin: 5px" />
+            {{ t("buttons.hsLoginOut") }}
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
   </div>
 </template>
 

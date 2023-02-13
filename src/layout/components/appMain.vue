@@ -30,7 +30,8 @@ const layout = computed(() => {
 
 const getSectionStyle = computed(() => {
   return [
-    hideTabs.value && layout ? "padding-top: 48px;" : "",
+    // 由于取消顶部NavBar，因此padding-top值改小
+    hideTabs.value && layout ? "padding: 10px;" : "",
     !hideTabs.value && layout ? "padding-top: 85px;" : "",
     hideTabs.value && !layout.value ? "padding-top: 48px" : "",
     !hideTabs.value && !layout.value ? "padding-top: 85px;" : "",

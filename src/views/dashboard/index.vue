@@ -1,0 +1,11 @@
+<script setup lang="ts">
+import VsVideo from "./vs-video.vue";
+
+defineOptions({
+  name: "Welcome"
+});
+</script>
+
+<template>
+  <h1>Pure-Admin-Thin（国际化版本）</h1>
+</template>

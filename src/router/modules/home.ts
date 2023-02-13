@@ -5,7 +5,7 @@ export default {
   path: "/",
   name: "Home",
   component: Layout,
-  redirect: "/welcome",
+  redirect: "/dashboard",
   meta: {
     icon: "homeFilled",
     title: $t("menus.hshome"),
@@ -13,11 +13,11 @@ export default {
   },
   children: [
     {
-      path: "/welcome",
-      name: "Welcome",
-      component: () => import("@/views/welcome/index.vue"),
+      path: "/dashboard",
+      name: "Dashboard",
+      component: () => import("@/views/dashboard/index.vue"),
       meta: {
-        title: $t("menus.hshome")
+        title: $t("menus.dashborad")
       }
     }
   ]

@@ -38,10 +38,10 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
       @toggleClick="toggleSideBar"
     />
 
-    <Breadcrumb
+    <!-- <Breadcrumb
       v-if="layout !== 'mix' && device !== 'mobile'"
       class="breadcrumb-container"
-    />
+    /> -->
 
     <mixNav v-if="layout === 'mix'" />
 
@@ -84,7 +84,7 @@ const { t, locale, translationCh, translationEn } = useTranslationLang();
       </el-dropdown>
       <!-- 退出登录 -->
       <el-dropdown trigger="click">
-        <span class="el-dropdown-link navbar-bg-hover select-none">
+        <span class="select-none el-dropdown-link navbar-bg-hover">
           <img
             src="https://avatars.githubusercontent.com/u/44761321?v=4"
             :style="avatarsStyle"
